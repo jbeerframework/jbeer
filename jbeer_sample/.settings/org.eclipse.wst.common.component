@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="jbeer_sample">
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <dependent-module archiveName="jbeer_framework-0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jbeer_framework/jbeer_framework">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jbeer_test-0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jbeer_test/jbeer_test">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jbeer_server-0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jbeer_server/jbeer_server">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jbeer_timer-0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jbeer_timer/jbeer_timer">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jbeer_ws-0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jbeer_ws/jbeer_ws">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="jbeer_sample"/>
+        <property name="java-output-path" value="/jbeer_sample/target/classes"/>
+    </wb-module>
+</project-modules>

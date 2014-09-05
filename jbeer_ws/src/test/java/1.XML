@@ -1,0 +1,23 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+		<wsse:Security
+			xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+			xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+			soap:mustUnderstand="1">
+			<wsse:UsernameToken
+				wsu:Id="UsernameToken-d4e02fdb-e01b-4f18-9c80-2d54ef61365f">
+				<wsse:Username>client</wsse:Username>
+				<wsse:Password
+					Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest">GAXYObyV60I0iuEkqOoOCt/GhUM=</wsse:Password>
+				<wsse:Nonce
+					EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">xYVWNnxSOdMwE2ZiSTJG6w==</wsse:Nonce>
+				<wsu:Created>2014-07-29T08:55:07.201Z</wsu:Created>
+			</wsse:UsernameToken>
+		</wsse:Security>
+	</SOAP-ENV:Header>
+	<soap:Body>
+		<ns2:sayHello xmlns:ns2="http://ws.framework.jbeer.com/">
+			<arg0>bieber</arg0>
+		</ns2:sayHello>
+	</soap:Body>
+</soap:Envelope>

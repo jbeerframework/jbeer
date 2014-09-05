@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<context-param>
+		<param-name>basePackageName</param-name>
+		<param-value>org.jbeer.sample</param-value>
+	</context-param>
+	<listener>
+		<listener-class>com.jbeer.framework.startup.JBeerWebContextListener</listener-class>
+	</listener>
+	<servlet>
+		<servlet-name>cxfServlet</servlet-name>
+		<servlet-class>com.jbeer.framework.ws.WSServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>cxfServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>jbeerDispatcherServlet</servlet-name>
+		<servlet-class>com.jbeer.framework.web.JBeerDispatcherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jbeerDispatcherServlet</servlet-name>
+		<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
+</web-app>

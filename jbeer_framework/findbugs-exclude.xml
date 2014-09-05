@@ -1,0 +1,125 @@
+<FindBugsFilter>
+	<Match>
+			<!-- 
+			DM_DEFAULT_ENCODING：当调用string的getBytes方法返回字节数组时候，如果没有设置字符集则会出现这个警告
+			DMI_INVOKING_HASHCODE_ON_ARRAY：表示调用了数组对象的hashcode方法
+			EI_EXPOSE_REP：对私有属性的get方法的时候，直接返回私有属性对象，没有返回一个copy对象，为了防止外部内容对这个私有属性对象内部信息的修改
+			EI_EXPOSE_REP2：表述私有属性的set方法，警告外部可以通过set方法修改对象的私有属性
+			SE_BAD_FIELD:描述类实现了serializable接口，但是没有实现readObject和writeObject方法
+			 -->
+		 <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2,DMI_INVOKING_HASHCODE_ON_ARRAY,DM_DEFAULT_ENCODING,SE_BAD_FIELD"></Bug>
+	</Match>
+	<!-- 当前这个方法是业务要求这样执行 -->
+	<Match>
+		<Class name="com.pinganfu.mtp.common.integration.cip.impl.PasswordClientImpl"/>
+		<Method name="verifyLoginPasswordIsNull"/>
+		<Bug pattern="NP_BOOLEAN_RETURN_NULL"/>
+	</Match>
+	<!-- 由于在 saveData,removeData两个方法中调用了File对象的mkdirs,delete等方法，没有检查该方法返回的值-->
+	<Match>
+		<Class name="com.pinganfu.mtp.common.integration.store.impl.StoreUtilClientImpl" />
+		<Method name="saveData"/>
+		<Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE"/>
+	</Match>
+	<!-- 由于在 saveData,removeData两个方法中调用了File对象的mkdirs,delete等方法，没有检查该方法返回的值-->
+	<Match>
+		<Class name="com.pinganfu.mtp.common.integration.store.impl.StoreUtilClientImpl" />
+		<Method name="removeData"/>
+		<Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE"/>
+	</Match>
+	<!-- 该方法中对一个Integer属性，在拆包之后，立马进行封包，形式如：method(condition?0:Integer),method=function(Integer arg) -->
+	<Match>
+		<Class name="com.pinganfu.mtp.common.integration.transcore.convert.TransSummaryQueryConvert" />
+		<Method name="transSummaryQueryRspConvert"/>
+		<Bug pattern="BX_UNBOXING_IMMEDIATELY_REBOXED"/>
+	</Match>
+	
+	<!--  该方法中重复检查了一个变量的非空状态，在代码的209行和210行-->
+	<Match>
+		<Class name="com.pinganfu.mtp.common.integration.cip.impl.PrepaidCardClientImpl" />
+		<Method name="getPrepaidCardsByCustomerId"/>
+		<Bug pattern="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE"/>
+	</Match>
+	
+	<!-- 没有对File对象方法返回的值进行校验 -->
+	<Match>
+		<Class name="com.pinganfu.mtp.common.integration.caps.impl.CreditAcctClientImpl" />
+		<Method name="removeCreditImage"/>
+		<Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE"></Bug>
+	</Match>
+	
+	<!-- 没有对File对象方法返回的值进行校验 -->
+	<Match>
+		<Class name="com.pinganfu.mtp.common.integration.caps.impl.CreditAcctClientImpl" />
+		<Method name="uploadCreditImage" />
+		<Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE"></Bug>
+	</Match>
+	
+	
+	<!-- 该方法中调用对象的equal方法参数传递的是和该对象不相关的类型 -->
+	 <Match>
+		<Class name="com.pinganfu.mtp.service.cip.impl.CustCustomizedConfigServiceImpl"/>
+		<Method name="getOfflineDefaultQuota"/>
+		<Bug pattern="EC_UNRELATED_TYPES"/>
+	</Match>
+	<!-- 对一个不可能为空的对象进行非空判断 -->
+	<Match>
+		<Class name="com.pinganfu.mtp.service.cip.impl.CustCustomizedConfigServiceImpl"/>
+		<Method name="setOfflinePaymentQuota"/>
+		<Bug pattern="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE"/>
+	</Match>
+	<!-- SmsCode类重写的equals方法，并且没有调用super.equals方法，而在BindCardInfo里面并没有重写equals方法-->
+	<Match>
+		<Class name="com.pinganfu.mtp.service.cache.model.SmsCode"/>
+		<Method name="equals"/>
+		<Bug pattern="EQ_DOESNT_OVERRIDE_EQUALS"/>
+	</Match>
+	<Match>
+		<Class name="com.pinganfu.mtp.service.cache.model.BindCardInfo"/>
+		<Method name="equals"/>
+		<Bug pattern="EQ_DOESNT_OVERRIDE_EQUALS"/>
+	</Match> 
+	
+	<!-- 往HashSet集合实体里面add对象没有实现hashCode方法 -->
+	 <Match>
+		<Class name="com.pinganfu.mtp.web.controller.p2.QueryMerchantsController"/>
+		<Method name="getCityMerchants"/>
+		<Bug pattern="HE_USE_OF_UNHASHABLE_CLASS"/>
+	</Match>
+	<!-- 在类中并没有申明对某个属性赋值，然后直接引用，这样在Controller里面Spring自动注入比较容易出现这个提示 -->
+	<Match>
+		<Class name="com.pinganfu.mtp.web.controller.p1.GroupPayController"/>
+		<Bug pattern="NP_UNWRITTEN_FIELD, UWF_UNWRITTEN_FIELD"/>
+	</Match>
+	<!-- 类重写了equals方法，没重写hashCode方法 -->
+	<Match>
+		<Class name="com.pinganfu.mtp.web.controller.p2.packet.type.MerchantInfo" />
+		<Method name="equals"/>
+		<Bug pattern="HE_EQUALS_USE_HASHCODE"/>
+	</Match>
+	
+	<!-- 由于当前方法返回的是一个final类型的数据，所以不需要进行该类型的警告 -->
+	<Match>
+		<Class name="com.pinganfu.mtp.common.util.RandomUtil"/>
+		<Bug pattern="MS_EXPOSE_REP"/>
+		<Method name="getAlphabetNumberSymbols"/>
+	</Match>
+	<!-- 该方法是将字节码转义成16进制，条件里面包含了所有十六进制的条件，所以不需要进行default -->
+	<Match>
+		<Class name="com.pinganfu.mtp.common.util.DESUtil"/>
+		<Method name="toHex"/>
+		<Bug pattern="SF_SWITCH_NO_DEFAULT"/>
+	</Match>
+	<!-- Switch代码段没有定义default-->
+	<Match>
+		<Class name="com.pinganfu.mtp.web.controller.p1.SwarmActivityController"/>
+		<Method name="convertTranType"/>
+		<Bug pattern="SF_SWITCH_NO_DEFAULT"/>
+	</Match>
+	<!-- 该类是一个枚举类型，无法重写equals方法 -->
+	<Match>
+		<Class name="com.pinganfu.mtp.service.caps.model.credit.CreditApplyStatus"/>
+		<Method name="equal"/>
+		<Bug pattern="NM_BAD_EQUAL"/>
+	</Match>
+</FindBugsFilter>
